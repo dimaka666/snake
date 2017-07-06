@@ -1,0 +1,30 @@
+#wrapper {
+  margin: 20px auto;
+  width: 500px;
+  height: 700px;
+}
+
+#snakebox {
+  width: 100%;
+  height: 100%;
+  background-color: rgb(131, 190, 105);
+}
+.inputs {
+  width: 350px;
+  height: 300px;
+  padding: 156px 75px;
+}
+input {
+  display: block;
+  width: 306px;
+  margin: 0 auto;
+  padding: 20px;
+  font-size: 35px;
+}
+button {
+  display: block;
+  width: 100%;
+  margin: 0 auto;
+  padding: 20px;
+  font-size: 35px;
+}
