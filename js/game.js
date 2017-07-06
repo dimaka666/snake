@@ -69,6 +69,7 @@ Snake.prototype.update = function(dt) {
 Snake.prototype.reset = function(){
    snake = new Snake();
    point.reset();
+   interF.scoreValue = 0;
 }
 
 // Adding next box to the Snake body and removes to old one. Depending on direction.
