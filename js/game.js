@@ -45,7 +45,7 @@ var Snake = function(){
 }
 
 // Movement method. Checking for borders. Flag for food.
-Snake.prototype.update = function(dt) {
+Snake.prototype.update = function() {
     var list = this.body;
     ctx.clearRect(this.body[this.body.length - 1].x, this.body[this.body.length - 1].y, this.size, this.size);
     this.nextItem();
@@ -75,25 +75,23 @@ Snake.prototype.reset = function(){
 // Adding next box to the Snake body and removes to old one. Depending on direction.
 Snake.prototype.nextItem = function () {
   var list = this.body;
+  var next;
   switch (this.direction) {
     case 'up':
-      var next = {'x' : list[list.length - 1].x, 'y' : list[list.length - 1].y - this.size};
-      this.body.push(next);
+      next = {'x' : list[list.length - 1].x, 'y' : list[list.length - 1].y - this.size};
       break;
     case 'right':
-      var next = {'x' : list[list.length - 1].x + this.size, 'y' : list[list.length - 1].y};
-      this.body.push(next);
+      next = {'x' : list[list.length - 1].x + this.size, 'y' : list[list.length - 1].y};
       break;
     case 'down':
-      var next = {'x' : list[list.length - 1].x, 'y' : list[list.length - 1].y + this.size};
-      this.body.push(next);
+      next = {'x' : list[list.length - 1].x, 'y' : list[list.length - 1].y + this.size};
       break;
     case 'left':
       var next = {'x' : list[list.length - 1].x - this.size, 'y' : list[list.length - 1].y};
-      this.body.push(next);
       break;
     default:
   }
+  this.body.push(next);
 }
 
 // Handle human imput.
@@ -101,7 +99,11 @@ Snake.prototype.changeDir = function(key){
   if(this.direction != "up" && key == "down" || key == "up" && this.direction != "down" ||
       this.direction != "left" && key == "right" || key == "left" && this.direction != "right")
       {
-        this.direction = key;
+        if(this.direction != key){
+          this.direction = key;
+          this.nextItem();
+          this.body.shift();
+        }
       }
 }
 
