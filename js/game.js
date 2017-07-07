@@ -42,6 +42,7 @@ var Snake = function(){
   this.speed = 15;
   this.size = 20;
   this.food = false;
+  this.newDir = "";
 }
 
 // Movement method. Checking for borders. Flag for food.
@@ -76,7 +77,10 @@ Snake.prototype.reset = function(){
 Snake.prototype.nextItem = function () {
   var list = this.body;
   var next;
-  switch (this.direction) {
+  var dir = (this.newDir.length > 0) ? this.newDir : this.direction;
+  this.direction = dir;
+  this.newDir = ""; 
+  switch (dir) {
     case 'up':
       next = {'x' : list[list.length - 1].x, 'y' : list[list.length - 1].y - this.size};
       break;
@@ -99,11 +103,7 @@ Snake.prototype.changeDir = function(key){
   if(this.direction != "up" && key == "down" || key == "up" && this.direction != "down" ||
       this.direction != "left" && key == "right" || key == "left" && this.direction != "right")
       {
-        if(this.direction != key){
-          this.direction = key;
-          this.nextItem();
-          this.body.shift();
-        }
+        this.newDir = key;
       }
 }
 
